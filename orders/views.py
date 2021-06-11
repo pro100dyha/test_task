@@ -1,5 +1,5 @@
 from django.db.models import Sum, F
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 from orders.forms import PeriodForm
 from orders.models import OrderItem, Order
 from django.urls import reverse_lazy
@@ -15,8 +15,10 @@ class FirstPageView(FormView):
         context = self.get_context_data(form=form)
         dates = form.cleaned_data
         context['orders'] = Order.objects.prefetch_related('items').annotate(
-            all_sum=Sum(F('items__product_price')*F('items__amount'))
-        ).filter(created_date__gte=dates['start_period'], created_date__lte=dates['end_period'])
+            all_sum=Sum(F('items__product_price')*F('items__amount'))).filter(
+            created_date__gte=dates['start_period'],
+            created_date__lte=dates['end_period']
+        )
         return self.render_to_response(context)
 
 
