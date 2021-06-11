@@ -1,5 +1,5 @@
 from django.db.models import Sum, F
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView
 from orders.forms import PeriodForm
 from orders.models import OrderItem, Order
 from django.urls import reverse_lazy

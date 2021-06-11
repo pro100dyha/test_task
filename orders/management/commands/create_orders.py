@@ -17,13 +17,13 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         total = kwargs['total']
         start_created_date = datetime.strptime('01.01.2018 09:00', '%d.%m.%Y %H:%M')
+        order_items = []
         for i in range(total):
             order = Order.objects.create(
                 number=i,
                 created_date=start_created_date + timedelta(hours=i)
             )
 
-            order_items = []
             for j in range(randint(1, 5)):
                 order_items.append(
                     OrderItem(
@@ -33,4 +33,4 @@ class Command(BaseCommand):
                         amount=randint(1, 100)
                     )
                 )
-            OrderItem.objects.bulk_create(order_items)
+        OrderItem.objects.bulk_create(order_items)

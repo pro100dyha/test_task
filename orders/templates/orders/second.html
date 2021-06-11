@@ -1,5 +1,5 @@
 {% extends 'orders/base.html' %}
-{% block second %}
+{% block table %}
     <h1> Second pages </h1>
     <a href={% url "first_page" %}> НА 1-ую СТРАНИЦУ</a>
     <h3>Введите данные</h3>
@@ -30,5 +30,4 @@
         </tr>
     {% endfor %}
     </table>
-    </body>
 {% endblock %}
